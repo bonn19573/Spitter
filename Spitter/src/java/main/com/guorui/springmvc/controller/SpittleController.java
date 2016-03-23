@@ -16,6 +16,8 @@ import com.guorui.springmvc.entity.Spittle;
 @RequestMapping("/spittles")
 public class SpittleController {
 
+	private static final String MAX_LONG_AS_STRING = Long.toString(Long.MAX_VALUE);
+
 	private SpittleRepository spittleRepository;
 
 	@Autowired
@@ -23,18 +25,18 @@ public class SpittleController {
 		this.spittleRepository = spittleRepository;
 	}
 
+//	@RequestMapping(method = { RequestMethod.GET })
+//	public String spittles(Model model) {
+//
+//		List<Spittle> spittles = spittleRepository.findSpittles(Long.MAX_VALUE, 20);
+//		model.addAttribute("spittleList", spittles);
+//
+//		return "spittles";
+//
+//	}
+
 	@RequestMapping(method = { RequestMethod.GET })
-	public String spittles(Model model) {
-
-		List<Spittle> spittles = spittleRepository.findSpittles(Long.MAX_VALUE, 20);
-		model.addAttribute("spittleList", spittles);
-
-		return "spittles";
-
-	}
-
-	@RequestMapping(method = { RequestMethod.GET })
-	public List<Spittle> spittles(@RequestParam(value = "max") long max, @RequestParam("count") int count) {
+	public List<Spittle> spittles(@RequestParam(value="max",defaultValue="1000") long max, @RequestParam(value = "count", defaultValue = "20") int count) {
 		return spittleRepository.findSpittles(max, count);
 	}
 
