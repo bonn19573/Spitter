@@ -55,7 +55,7 @@ public class SpittleControllerTest {
 		SpittleController sController = new SpittleController(spittleRepository);
 		
 		MockMvc mockMvc = standaloneSetup(sController).setSingleView(new InternalResourceView("/WEB-INF/views/spittle.jsp")).build();
-		mockMvc.perform(get("/spittles/show?spittleId=12345")).andExpect(view().name("spittle")).andExpect(model().attributeExists("spittle"))
+		mockMvc.perform(get("/spittles/12345")).andExpect(view().name("spittle")).andExpect(model().attributeExists("spittle"))
 		.andExpect(model().attribute("spittle", spittleList.get(0)));		
 		
 	}
