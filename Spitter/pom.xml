@@ -7,6 +7,11 @@
 	<packaging>war</packaging>
 	<name>Spitter</name>
 	<description>first spring mvc practice</description>
+	
+	<properties>
+		<spring.version>4.2.5.RELEASE</spring.version>
+	</properties>
+	
 	<build>
 		<sourceDirectory>src/java/main</sourceDirectory>
 		<testSourceDirectory>src/test/main</testSourceDirectory>
@@ -45,7 +50,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>4.2.5.RELEASE</version>
+			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -54,10 +59,15 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>3.0-alpha-1</version>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
 	</dependencies>
 </project>
