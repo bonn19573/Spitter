@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.guorui.springmvc.dao.SpittleRepository;
 import com.guorui.springmvc.entity.Spittle;
@@ -30,6 +31,11 @@ public class SpittleController {
 
 		return "spittles";
 
+	}
+
+	@RequestMapping(method = { RequestMethod.GET })
+	public List<Spittle> spittles(@RequestParam(value = "max") long max, @RequestParam("count") int count) {
+		return spittleRepository.findSpittles(max, count);
 	}
 
 }
