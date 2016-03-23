@@ -39,5 +39,11 @@ public class SpittleController {
 	public List<Spittle> spittles(@RequestParam(value="max",defaultValue="1000") long max, @RequestParam(value = "count", defaultValue = "20") int count) {
 		return spittleRepository.findSpittles(max, count);
 	}
+	
+	@RequestMapping(value = "/show",method = {RequestMethod.GET})
+	public String spittle(@RequestParam(value="spittleId") long spittleId, Model model){
+		model.addAttribute("spittle", spittleRepository.findOne(spittleId));
+		return "spittle";
+	}
 
 }
