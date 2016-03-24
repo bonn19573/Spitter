@@ -2,6 +2,7 @@ package com.guorui.springmvc.controller;
 
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -37,9 +38,9 @@ public class SpitterControllerTest {
 	}
 	
 	@Test
-	public void testSave() throws Exception{
+	public void testSaveValid() throws Exception{
 		SpitterRepository spitterRepository = mock(SpitterRepository.class);
-		Spitter spitter = new Spitter("Guo", "Rui", "bonn", "123");
+		Spitter spitter = new Spitter("Guo", "Rui", "bonn19573", "123456");
 		
 		SpitterController controller = new SpitterController(spitterRepository);
 		
@@ -48,11 +49,33 @@ public class SpitterControllerTest {
 		mockMvc.perform(post("/spitter/register")
 				.param("firstName", "Guo")
 				.param("lastName", "Rui")
-				.param("username", "bonn")
-				.param("password", "123"))
-		.andExpect(redirectedUrl("/spitter/bonn"));
+				.param("username", "bonn19573")
+				.param("password", "123456"))
+		.andExpect(redirectedUrl("/spitter/bonn19573"));
 		
 		verify(spitterRepository,atLeastOnce()).save(spitter);
+	}
+	
+	@Test
+	public void testSaveInvalid() throws Exception{
+		
+		SpitterRepository spitterRepository = mock(SpitterRepository.class);
+		Spitter spitter = new Spitter("Guo", "Rui", "bonn", "123");
+		SpitterController controller = new SpitterController(spitterRepository);
+		MockMvc mockMvc = standaloneSetup(controller).build();
+		
+		
+		mockMvc.perform(post("/spitter/register")
+				.param("firstName", "Guo")
+				.param("lastName", "Rui")
+				.param("username", "bonn")
+				.param("password", "123"))
+		.andExpect(view().name("registrationForm"));
+		
+		verify(spitterRepository,never()).save(spitter);		
+		
+		
+		
 	}
 	
 	@Test
