@@ -1,5 +1,8 @@
 package com.guorui.springmvc.controller;
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,8 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.guorui.springmvc.dao.SpitterRepository;
 import com.guorui.springmvc.entity.Spitter;
@@ -32,10 +37,11 @@ public class SpitterController {
 	}
 
 	@RequestMapping(value = "register", method = RequestMethod.POST)
-	public String saveSpitter(@Valid Spitter spitter, Errors errors) {
+	public String saveSpitter(@RequestPart("profilePicture") MultipartFile profilePicture, @Valid Spitter spitter, Errors errors) throws IllegalStateException, IOException {
 		if(errors.hasErrors()){
 			return "registrationForm";
 		}
+		profilePicture.transferTo(new File("F:\\book\\java\\spring\\"+profilePicture.getOriginalFilename()));
 		spitterRepository.save(spitter);
 
 		return "redirect:/spitter/" + spitter.getUsername();

@@ -15,13 +15,13 @@ public class MyServletInitializer implements WebApplicationInitializer {
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		
-		Dynamic servlet = servletContext.addServlet("MyServlet", MyServlet.class);
-		servlet.addMapping("/myservlet");
-		
-		javax.servlet.FilterRegistration.Dynamic filter = servletContext.addFilter("MyFilter", MyFilter.class);
-		filter.addMappingForUrlPatterns(null, false, "/myservlet");
-		
-		servletContext.addListener(MyListener.class);
+//		Dynamic servlet = servletContext.addServlet("MyServlet", MyServlet.class);
+//		servlet.addMapping("/myservlet");
+//		
+//		javax.servlet.FilterRegistration.Dynamic filter = servletContext.addFilter("MyFilter", MyFilter.class);
+//		filter.addMappingForUrlPatterns(null, false, "/myservlet");
+//		
+//		servletContext.addListener(MyListener.class);
 	}
 
 }

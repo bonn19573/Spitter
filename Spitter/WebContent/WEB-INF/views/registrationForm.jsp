@@ -18,7 +18,7 @@
 	<!-- 		<input type="submit" value="Register" /> -->
 	<!-- 	</form> -->
 
-	<sf:form method="POST" commandName="spitter">
+	<sf:form method="POST" commandName="spitter" enctype="multipart/form-data">
 		<sf:errors path="*" element="div" cssClass="errors" />
 		<sf:label path="firstName" cssErrorClass="error">First Name:</sf:label>
 		<sf:input path="firstName" cssErrorClass="error" />
@@ -35,6 +35,8 @@
 		<sf:label path="password" cssErrorClass="error">Password:</sf:label>
 		<sf:password path="password" cssErrorClass="error" />
 		<br />
+		<sf:label path="profilePicture">Profile Picture:</sf:label>
+		<input type="file" name="profilePicture"/>
 		<input type="submit" value="Register" />
 	</sf:form>
 </body>

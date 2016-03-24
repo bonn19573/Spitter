@@ -27,7 +27,7 @@ public class HelloWebAppInitializer extends AbstractAnnotationConfigDispatcherSe
 	@Override
 	protected void customizeRegistration(Dynamic registration) {
 		super.customizeRegistration(registration);
-		registration.setMultipartConfig(new MultipartConfigElement("/tmp/spitter/uploads"));
+		registration.setMultipartConfig(new MultipartConfigElement("F:\\book\\java\\spring"));
 	}
 
 	@Override

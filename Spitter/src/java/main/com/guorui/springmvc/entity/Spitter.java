@@ -5,6 +5,7 @@ import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.hibernate.validator.constraints.Email;
+import org.springframework.web.multipart.MultipartFile;
 
 public class Spitter {
 
@@ -24,6 +25,9 @@ public class Spitter {
 	@NotNull
 	@Email(message = "{email.valid}")
 	private String email;
+	
+	@NotNull
+	private MultipartFile profilePicture;
 
 	public Spitter() {
 	}
@@ -74,10 +78,27 @@ public class Spitter {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	
+
+	public MultipartFile getProfilePicture() {
+		return profilePicture;
+	}
+
+	public void setProfilePicture(MultipartFile profilePicture) {
+		this.profilePicture = profilePicture;
+	}
 
 	@Override
 	public boolean equals(Object that) {
 		return EqualsBuilder.reflectionEquals(this, that, "username");
 	}
+
+	@Override
+	public String toString() {
+		return "Spitter [firstName=" + firstName + ", lastName=" + lastName + ", username=" + username + ", password=" + password + ", email=" + email + "]";
+	}
+	
+	
 
 }
