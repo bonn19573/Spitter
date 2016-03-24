@@ -11,6 +11,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.servlet.view.InternalResourceView;
@@ -66,6 +69,33 @@ public class SpitterControllerTest {
 		mockMvc.perform(get("/spitter/bonn")).andExpect(view().name("profile"))
 		.andExpect(model().attributeExists("spitter"))
 		.andExpect(model().attribute("spitter", spitter));
+	}
+	
+	
+	@Test
+	public void testShowAllSpitters() throws Exception{
+		SpitterRepository spitterRepository = mock(SpitterRepository.class);
+		Collection<Spitter> spitterList = createSpitterList(2);
+		when(spitterRepository.findAll()).thenReturn(spitterList);
+		
+		SpitterController controller = new SpitterController(spitterRepository);
+		
+		
+		
+		MockMvc mockMvc = standaloneSetup(controller).build();
+		mockMvc.perform(get("/spitter")).andExpect(view().name("spitters")).andExpect(model().attribute("spitterList", spitterList));
+		
+		
+	}
+	
+	
+	private Collection<Spitter> createSpitterList(int count){
+		Collection<Spitter> result = new ArrayList<>();
+		for(int i=0;i<count;i++){
+			Spitter spitter = new Spitter("aa", "bb", "bonn"+i, "111");
+			result.add(spitter);
+		}
+		return result;
 	}
 
 }

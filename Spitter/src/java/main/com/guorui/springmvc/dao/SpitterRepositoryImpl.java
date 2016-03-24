@@ -1,5 +1,6 @@
 package com.guorui.springmvc.dao;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,6 +21,11 @@ public class SpitterRepositoryImpl implements SpitterRepository {
 	@Override
 	public Spitter findByName(String name) {
 		return spitterMap.get(name);
+	}
+
+	@Override
+	public Collection<Spitter> findAll() {
+		return spitterMap.values();
 	}
 
 	

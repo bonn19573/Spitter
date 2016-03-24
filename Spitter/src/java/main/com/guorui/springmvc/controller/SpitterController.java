@@ -43,4 +43,10 @@ public class SpitterController {
 		return "profile";
 		
 	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public String showAllSpitterList(Model model){
+		model.addAttribute(spitterRepository.findAll());
+		return "spitters";
+	}
 }
