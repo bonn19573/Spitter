@@ -1,0 +1,11 @@
+label.error {
+color: red;
+}
+
+input.error {
+background-color: #ffcccc;
+}
+
+.errors{
+	color: red;
+}
