@@ -1,6 +1,12 @@
 package com.guorui.springmvc.config;
 
+import javax.servlet.Filter;
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletRegistration.Dynamic;
+
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+import com.guorui.springmvc.servlet.MyFilter;
 
 public class HelloWebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 	@Override
@@ -17,4 +23,20 @@ public class HelloWebAppInitializer extends AbstractAnnotationConfigDispatcherSe
 	protected Class<?>[] getServletConfigClasses() {
 		return new Class<?>[] { WebConfig.class };
 	}
+
+	@Override
+	protected void customizeRegistration(Dynamic registration) {
+		super.customizeRegistration(registration);
+		registration.setMultipartConfig(new MultipartConfigElement("/tmp/spitter/uploads"));
+	}
+
+	@Override
+	protected Filter[] getServletFilters() {
+		return new Filter[]{new MyFilter()};
+	}
+	
+	
+	
+	
+	
 }
